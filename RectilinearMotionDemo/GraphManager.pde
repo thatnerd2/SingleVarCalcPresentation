@@ -14,11 +14,22 @@ import org.gwoptics.graphics.colourmap.*;
 static class GraphManager {
   static Graph2D g;
   static RectilinearMotionDemo parent;
-  static Line2DTrace trace;
+  static Line2DTrace sTrace;
+  static Line2DTrace vTrace;
+  static Line2DTrace aTrace;
+  
   
   static class eq implements ILine2DEquation {
+    static String expr;
+    
+    public eq (String e) {
+      expr = e;
+    }
+    
     public double computePoint (double x, int pos) {
-      return parent.getAnswer((float) x, parent.s, 3);
+      float ans = parent.getAnswer((float) x, expr, 3);
+      println(ans);
+      return ans;
     }
   }
   
@@ -28,7 +39,6 @@ static class GraphManager {
     g = new Graph2D(parent, 400, 200, false);
     
     g.setXAxisLabel("t");
-    g.setYAxisLabel("position");
     g.position.y = inst.height - 300;
     g.position.x = 100;
     g.setYAxisTickSpacing(1);
@@ -37,15 +47,29 @@ static class GraphManager {
     g.setYAxisMax(1.1);
     g.setYAxisMin(-1f);
     
-    trace = new Line2DTrace(new eq());
-    g.addTrace(trace);
+    sTrace = new Line2DTrace(new eq(parent.s));
+    vTrace = new Line2DTrace(new eq(parent.v));
+    aTrace = new Line2DTrace(new eq(parent.a));
+    
+    sTrace.setTraceColour(255, 0, 0);
+    vTrace.setTraceColour(0, 255, 0);
+    aTrace.setTraceColour(0, 0, 255);
+    
+    g.addTrace(sTrace);
+    //g.addTrace(vTrace);
+    //g.addTrace(aTrace);
   }
   
   static void display (float maxX) {
-    g.removeTrace(trace);
+    g.removeTrace(sTrace);
+    //g.removeTrace(vTrace);
+    //g.removeTrace(aTrace);
+    
     g.setXAxisMax(maxX);
     g.setXAxisTickSpacing(maxX / 10);
-    g.addTrace(trace);
+    g.addTrace(sTrace);
+    //g.addTrace(vTrace);
+    //g.addTrace(aTrace);
     g.draw();
   }
 }
