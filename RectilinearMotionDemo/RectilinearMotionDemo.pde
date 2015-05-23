@@ -82,10 +82,12 @@ public void Reset (int v) {
 
 public void incStep (int v) {
   step += 0.1;
+  savedStep = step;
 }
 
 public void decStep (int v) {
   if (step > 0) step -= 0.1;
+  savedStep = step;
 }
 
 void writeStatus () {
