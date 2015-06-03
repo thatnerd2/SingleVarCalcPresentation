@@ -46,6 +46,7 @@ static class GraphManager {
     g.setXAxisMin(0f);
     g.setYAxisMax(1.1);
     g.setYAxisMin(-1f);
+    g.setYAxisLabel("Position");
     
     sTrace = new Line2DTrace(new eq(parent.s));
     vTrace = new Line2DTrace(new eq(parent.v));

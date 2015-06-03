@@ -28,6 +28,7 @@ ControlP5 gui;
 
 void setup () {
   size(800, 600);
+  
   leftAlign = width - 200;
   f = createFont("Arial", 16, true);
   
@@ -48,7 +49,7 @@ void setup () {
   GraphManager.init(this);
   
   t = 0;
-  step = 0.1;
+  step = 0;
   savedStep = 0.1;
   
   textFont(f);
@@ -64,7 +65,7 @@ void draw () {
   line(50, 30, 500, 30);
   int offset = (500 + 50) / 2;
   float st = getAnswer(t, s, 3);
-  ellipse(st * 100 + offset, 30, 30, 30);
+  ellipse(-(st * 100 + offset), 30, 30, 30);
   GraphManager.display(t);
   
   writeStatus();
