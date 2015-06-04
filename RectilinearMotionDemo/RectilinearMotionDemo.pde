@@ -65,7 +65,7 @@ void draw () {
   line(50, 30, 500, 30);
   int offset = (500 + 50) / 2;
   float st = getAnswer(t, s, 3);
-  ellipse(-(st * 100 + offset), 30, 30, 30);
+  ellipse((-st * 100 + offset), 30, 30, 30);
   GraphManager.display(t);
   
   writeStatus();
